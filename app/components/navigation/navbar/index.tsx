@@ -1,18 +1,24 @@
 "use client";
 
+import useUserLogin from '../hooks';
 import Button from './button'
 
-const NavBar = () =>  {
+const NavBar = () => {
 
-    return (
-        <nav className="flex w-screen justify-center">
-        <div>
-          <a href="/" className="pl-10">POPOI</a>
-          <a href="/scoreboard/" className="pl-10">Scoreboard</a>
+  const { isLogged, checkIsLogged } = useUserLogin();
+
+  return (
+    <nav>
+      <div className="flex">
+        <div className="flex w-screen justify-center">
+          <a href="/" className="p-2">POPOI</a>
+          <a href="/scoreboard/" className="p-2">Scoreboard</a>
         </div>
-        <Button />
-      </nav>
-    )
+        <Button isLogged={isLogged} checkIsLogged={checkIsLogged} />
+      </div>
+    </nav>
+
+  )
 }
 
 export default NavBar;
