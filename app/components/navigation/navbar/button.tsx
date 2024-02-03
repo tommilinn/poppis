@@ -1,12 +1,14 @@
 
-export const Button = () => {
+import { Button } from "@/components/ui/button"
+
+export const LoginButton = () => {
     const handleLogin = () => {
         alert("we are doing some login stuff")
     }
 
     return (
-        <button className="w-15" onClick={() => {alert("we are doing some login stuff")}}></button>
+        <Button onClick={() => {alert("we are doing some login stuff")}}>Login</Button>
     )
 }
 
-export default Button;
+export default LoginButton;

@@ -1,18 +1,22 @@
 "use client";
 
-import Button from './button'
+import { NavigationMenu, NavigationMenuItem, NavigationMenuLink } from '@/components/ui/navigation-menu';
+import Button, { LoginButton } from './button'
+import Link from 'next/link';
 
-const NavBar = () =>  {
+const NavBar = () => {
 
-    return (
-        <nav className="flex w-screen justify-center">
-        <div>
-          <a href="/" className="pl-10">POPOI</a>
-          <a href="/scoreboard/" className="pl-10">Scoreboard</a>
-        </div>
-        <Button />
-      </nav>
-    )
+  return (
+    <NavigationMenu>
+      <NavigationMenuItem>POPPIS  </NavigationMenuItem>
+      
+      <NavigationMenuItem>
+      <LoginButton />
+      </NavigationMenuItem>
+      
+    </NavigationMenu>
+    
+  )
 }
 
 export default NavBar;
