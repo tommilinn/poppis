@@ -4,7 +4,9 @@ import { NavigationMenu, NavigationMenuItem, NavigationMenuLink } from '@/compon
 import Button, { LoginButton } from './button'
 import Link from 'next/link';
 
-const NavBar = () => {
+const NavBar = () =>{
+
+  const { isLogged, checkIsLogged } = useUserLogin();
 
   return (
     <NavigationMenu>

@@ -1,9 +1,15 @@
+import useUserLogin from "../hooks";
+
+interface IButtonProps {
+    isLogged: boolean;
+    checkIsLogged: () => void;
+}
 
 import { Button } from "@/components/ui/button"
 
-export const LoginButton = () => {
+export const LoginButton = (props: IButtonProps) => {
     const handleLogin = () => {
-        alert("we are doing some login stuff")
+        props.checkIsLogged();
     }
 
     return (
