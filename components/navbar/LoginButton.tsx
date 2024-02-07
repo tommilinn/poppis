@@ -1,11 +1,9 @@
-import useUserLogin from "../hooks";
+import { Button } from "@/components/ui/button"
 
 interface IButtonProps {
     isLogged: boolean;
     checkIsLogged: () => void;
 }
-
-import { Button } from "@/components/ui/button"
 
 export const LoginButton = (props: IButtonProps) => {
     const handleLogin = () => {
@@ -13,7 +11,7 @@ export const LoginButton = (props: IButtonProps) => {
     }
 
     return (
-        <Button onClick={() => {alert("we are doing some login stuff")}}>Login</Button>
+        <Button onClick={handleLogin} >{props.isLogged ? "Logged" : "Login"}</Button>
     )
 }
 
