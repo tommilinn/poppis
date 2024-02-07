@@ -3,6 +3,7 @@
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink } from '@/components/ui/navigation-menu';
 import Button, { LoginButton } from './button'
 import Link from 'next/link';
+import useUserLogin from '../hooks';
 
 const NavBar = () =>{
 
@@ -13,7 +14,7 @@ const NavBar = () =>{
       <NavigationMenuItem>POPPIS  </NavigationMenuItem>
       
       <NavigationMenuItem>
-      <LoginButton />
+      <LoginButton isLogged={isLogged} checkIsLogged={checkIsLogged}/>
       </NavigationMenuItem>
       
     </NavigationMenu>
