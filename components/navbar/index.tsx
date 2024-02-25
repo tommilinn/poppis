@@ -10,31 +10,31 @@ const NavBar = () => {
   const { isLogged, checkIsLogged } = useUserLogin();
 
   return (
-    <NavigationMenu>
-      <NavigationMenuList>
-        <NavigationMenuItem>POPPIS  </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="/" passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Home
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
+    <div className='flex w-full justify-between items-center'>
+      <div className='p-5'>POPPIS</div>
+      <NavigationMenu className='w-full'>
 
-        <NavigationMenuItem>
-          <Link href="/scoreboard" passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Scoreboard
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
 
-        <NavigationMenuItem>
-          <LoginButton isLogged={isLogged} checkIsLogged={checkIsLogged} />
-        </NavigationMenuItem>
-      </NavigationMenuList>
+        <NavigationMenuList className=''>
+          <NavigationMenuItem>
+            <Link href="/" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                Home
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
 
-    </NavigationMenu>
+          <NavigationMenuItem>
+            <Link href="/scoreboard" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                Scoreboard
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
+      <LoginButton isLogged={isLogged} checkIsLogged={checkIsLogged} />
+    </div>
   )
 }
 
