@@ -1,8 +1,9 @@
+"use client"
+
 import { FormEvent } from 'react'
 import { useRouter } from 'next/router'
  
 const LoginPage = () => {
-  const router = useRouter()
  
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()

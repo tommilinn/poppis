@@ -35,7 +35,6 @@ export default async function handler(
 
   const u = {
     username: user.username,
-
   }
 
   const token = jwt.sign(u, process.env.JWT_SECRET ?? "Is this a risk?")
