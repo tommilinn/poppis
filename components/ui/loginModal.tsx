@@ -1,3 +1,4 @@
+import LoginForm from "../login/form";
 import {
   Dialog,
   DialogClose,
@@ -33,10 +34,9 @@ const LoginModal = ({ isOpen, onClose }: ILoginModalProps): JSX.Element | null =
     <Dialog open={isOpen} modal>
       <DialogContent ref={modalRef}>
         <DialogHeader>
-          <DialogTitle>Log in?</DialogTitle>
+          <DialogTitle>Log in</DialogTitle>
           <DialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            <LoginForm ></LoginForm>
           </DialogDescription>
         </DialogHeader>
         <DialogClose onClick={onClose}>Close</DialogClose>
