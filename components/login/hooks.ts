@@ -13,7 +13,6 @@ const useLogin = () => {
       body: JSON.stringify({ username, password }),
       mode: "cors",
     });
-    await fetch('/api/hello');
   };
   return { login };
 };
