@@ -1,13 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 import { IUser } from "../types";
+import prisma from "../prisma";
 
-const prismaClient = new PrismaClient();
+const client = prisma;
 
-export const getUserByUsername = (username: string): IUser => {
-    // Replace with your actual database query
-    return {
-        username,
-        password: "password_hash", // Replace with your actual password hash
-        displayName: "John Doe", // Replace with your actual display name
-    }
+export const getUserById = async (id: string) => {
+  return await client.profile.findUnique({ where: { id } });
 };
