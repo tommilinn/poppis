@@ -1,3 +1,4 @@
+import * as bcrypt from "bcrypt";
 import prisma from "../prisma";
 
 const client = prisma;
@@ -6,16 +7,20 @@ export const createUserWithAuth = async (
   username: string,
   displayName: string,
   password: string
-) => {
-  const auth = await client.auth.create({
+): Promise<string> => {
+  password = await bcrypt.hash(password, 10);
+
+
+  const auth = await client.profile.create({
     data: {
-      password,
-      user: {
+      username,
+      displayName,
+      auth: {
         create: {
-          username,
-          displayName,
+          password,
         },
       },
     },
   });
+  return auth.id;
 };

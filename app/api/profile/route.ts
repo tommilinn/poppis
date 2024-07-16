@@ -4,7 +4,6 @@ import jwt from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
 import { IUser } from "../types";
 import { getUserByUsername } from "../profile/getUser";
-import { createUserWithAuth } from "./createUserWithAuth";
 
 interface AuthRequestBody {
   username: string;
@@ -24,12 +23,25 @@ export async function POST(
   try {
     const body: AuthRequestBody  = await req.json();
     const { username, password } = body;
-    const displayName = body.displayName || username;
+    const nickname = body.displayName || username;
     
     // Change testuser with your actual database query
-    const userId = await createUserWithAuth(username, displayName, password);
+    const dbuser = getUserByUsername(username);
+
+    const passwordCorrect =
+    !dbuser
+    ? false
+    : await bcrypt.compare(password, dbuser.password);
     
-    return NextResponse.json({ dbuser: userId }, { status: 200 });
+    if (!(dbuser && passwordCorrect)) {
+      const e = new Error("Invalid username or password");
+      e.name = "Unauthorized";
+      throw e;
+    }
+    
+    const token = jwt.sign(username, process.env.JWT_SECRET ?? "Is this a risk?");
+
+    return NextResponse.json({ username, token, displayName: nickname }, { status: 200 });
   } catch (error) {
     return NextResponse.json(
       { error: (error as Error).message },
