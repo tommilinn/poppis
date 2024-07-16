@@ -1,6 +1,5 @@
 "use client"
 
-import LoginModal from "@/components/ui/loginModal"
 import { useEffect, useState } from "react"
 
 interface IScoreboard {

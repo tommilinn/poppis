@@ -1,12 +1,11 @@
-import LoginForm from "../login/form";
+import RegisterForm from "@/components/login/registerForm";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "./dialog";
+} from "@/components/ui/dialog";
 import { useEffect, useRef } from "react";
 
 interface ILoginModalProps {
@@ -14,7 +13,7 @@ interface ILoginModalProps {
   onClose: () => void;
 }
 
-const LoginModal = ({ isOpen, onClose }: ILoginModalProps): JSX.Element | null => {
+const RegisterModal = ({ isOpen, onClose }: ILoginModalProps): JSX.Element | null => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   // Close modal when clicked outside
@@ -34,15 +33,14 @@ const LoginModal = ({ isOpen, onClose }: ILoginModalProps): JSX.Element | null =
     <Dialog open={isOpen} modal>
       <DialogContent ref={modalRef}>
         <DialogHeader>
-          <DialogTitle>Log in</DialogTitle>
+          <DialogTitle>Register</DialogTitle>
+            <RegisterForm ></RegisterForm>
           <DialogDescription>
-            <LoginForm ></LoginForm>
           </DialogDescription>
         </DialogHeader>
-        <DialogClose onClick={onClose}>Close</DialogClose>
       </DialogContent>
     </Dialog>
   ) : null;
 };
 
-export default LoginModal;
+export default RegisterModal;

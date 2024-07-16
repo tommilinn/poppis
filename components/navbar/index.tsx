@@ -4,16 +4,21 @@ import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuL
 import { LoginButton } from './LoginButton'
 import useUserLogin from './hooks';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
-import LoginModal from '../ui/loginModal';
+import LoginModal from '../modals/loginModal';
+import { useModalState } from '../modals/hooks';
+import RegisterModal from '../modals/registerModal';
 
 const NavBar = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { modalState, openModalType, closeModal } = useModalState();
   const { isLogged, checkIsLogged } = useUserLogin();
 
   const handleLoginClick = () => {
-    setIsModalOpen(true);
+    openModalType('LOGIN');
+  };
+
+  const handleRegisterClick = () => {
+    openModalType('REGISTER');
   };
 
   return (
@@ -41,7 +46,8 @@ const NavBar = () => {
       </NavigationMenu>
       <LoginButton isLogged={isLogged} checkIsLogged={checkIsLogged} onClick={handleLoginClick} />
 
-      <LoginModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <LoginModal isOpen={modalState === "LOGIN"} onRegister={handleRegisterClick} onClose={() => closeModal()} />
+      <RegisterModal isOpen={modalState === "REGISTER"} onClose={() => closeModal()} />
     </div>
   )
 }

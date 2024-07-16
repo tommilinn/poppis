@@ -17,15 +17,14 @@ const useLogin = () => {
 
   const registerUser = async (
     username: string,
-    password: string,
-    displayName: string
+    password: string
   ) => {
     await fetch("/api/auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password, displayName }),
+      body: JSON.stringify({ username, password }),
       mode: "cors",
     });
   };

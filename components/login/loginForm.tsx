@@ -21,8 +21,8 @@ const LoginForm = () => {
   // Put required after debugging
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" name="username" placeholder="username" value={process.env.NODE_ENV === "development" ? "test" : ""  } />
-      <input type="password" name="password" placeholder="Password" value={process.env.NODE_ENV === "development" ? "test" : ""  }  />
+      <input type="text" name="username" placeholder="username" />
+      <input type="password" name="password" placeholder="Password" />
       <button type="submit">Login</button>
     </form>
   );
