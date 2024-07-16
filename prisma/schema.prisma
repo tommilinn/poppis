@@ -10,16 +10,15 @@ datasource db {
     directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-model User {
-    id              String @id @default(cuid())
+model Profile {
+    id              String @id @default(uuid())
     username        String
-    nickname        String?
-    authId          String @unique
-    auth            Auth   @relation(fields: [authId], references: [id])
+    displayName     String
+    auth            Auth   @relation(fields: [id], references: [id])
 }
 
 model Auth {
     id              String @id @default(uuid())
     password        String
-    user            User?
+    user            Profile?
 }

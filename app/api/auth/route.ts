@@ -3,6 +3,7 @@ import * as bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
 import { IUser } from "../types";
+import { getUserByUsername } from "../profile/getUser";
 
 interface AuthRequestBody {
   username: string;
@@ -15,11 +16,6 @@ interface IResponseData {
   token: string;
   displayName?: string;
 }
-const dbTestUser: IUser = {
-  username: "testUser",
-  password: bcrypt.hashSync("testPass", 10),
-  displayName: "Test User",
-};
 
 export async function POST(
   req: NextRequest
@@ -29,13 +25,17 @@ export async function POST(
     const { username, password } = body;
     const nickname = body.displayName || username;
     
+
+
     // Change testuser with your actual database query
+    const dbuser = getUserByUsername(username);
+
     const passwordCorrect =
-    !dbTestUser
+    !dbuser
     ? false
-    : await bcrypt.compare(password, dbTestUser.password);
+    : await bcrypt.compare(password, dbuser.password);
     
-    if (!(dbTestUser && passwordCorrect)) {
+    if (!(dbuser && passwordCorrect)) {
       const e = new Error("Invalid username or password");
       e.name = "Unauthorized";
       throw e;
