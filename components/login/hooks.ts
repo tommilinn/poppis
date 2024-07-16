@@ -1,5 +1,10 @@
 const useLogin = () => {
   const login = async (username: string, password: string) => {
+    if(process.env.NODE_ENV === "development") {
+        username = "testUser";
+        password = "testPass";
+    }
+
     await fetch("/api/auth", {
       method: "POST",
       headers: {

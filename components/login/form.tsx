@@ -18,10 +18,11 @@ const LoginForm = () => {
     }
   };
 
+  // Put required after debugging
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" name="username" placeholder="username" required />
-      <input type="password" name="password" placeholder="Password" required />
+      <input type="text" name="username" placeholder="username" />
+      <input type="password" name="password" placeholder="Password" />
       <button type="submit">Login</button>
     </form>
   );

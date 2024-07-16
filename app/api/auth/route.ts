@@ -24,10 +24,8 @@ const dbTestUser: IUser = {
 export async function POST(
   req: NextRequest
 ) {
-  console.log("Received POST request at /api/auth");
   try {
     const body: AuthRequestBody  = await req.json();
-    // const user = await User.findOne({username: body.username})
     const { username, password } = body;
     const nickname = body.displayName || username;
     
