@@ -11,11 +11,15 @@ datasource db {
 }
 
 model User {
-    username        String @id @default(cuid())
+    id              String @id @default(cuid())
+    username        String
     nickname        String?
+    authId          String @unique
+    auth            Auth   @relation(fields: [authId], references: [id])
 }
 
 model Auth {
-    username        String @id @unique
+    id              String @id @default(uuid())
     password        String
+    user            User?
 }
