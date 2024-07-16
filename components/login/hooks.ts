@@ -5,8 +5,8 @@ const useLogin = () => {
       password = "testPass";
     }
 
-    await fetch("/api/prfile", {
-      method: "GET",
+    await fetch("/api/auth/login", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -20,7 +20,7 @@ const useLogin = () => {
     password: string,
     displayName: string
   ) => {
-    await fetch("/api/auth/", {
+    await fetch("/api/auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
