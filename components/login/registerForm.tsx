@@ -25,9 +25,10 @@ const RegisterForm = ({closeModal}: IRegisterFormProps) => {
       closeModal();
     }
   };
-  
+
   if(isPending) {
-    return Spinner;
+    
+    return <Spinner />;
   }
 
   // Put required after debugging
