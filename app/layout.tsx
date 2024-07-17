@@ -27,6 +27,7 @@ export default function RootLayout({
             <NavBar />
             {children}
           </PoppisProvider>
+          <ReactQueryDevtools />
         </ReactQueryProvider>
       </body>
     </html>

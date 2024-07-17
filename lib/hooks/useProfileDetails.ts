@@ -1,6 +1,6 @@
 import { IUser } from "@/app/api/types";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const fetchProfileDetails = async (
   userId: string | undefined
@@ -16,9 +16,14 @@ const useProfileDetails = (id: string | undefined) => {
 
   const result = useQuery<IUser | null, Error>({
     queryKey: ["profileDetails", profileId],
-    queryFn: () => fetchProfileDetails(profileId),
-    onSuccess: (data: IUser | null) => setProfileDetails(data),
-  } as UseQueryOptions<IUser | null, Error>);
+    queryFn: () => fetchProfileDetails(profileId)
+  });
+  
+  useEffect(() => {
+    if(result.isSuccess && profileDetails === null) {
+      setProfileDetails(result.data);
+    }
+  }, [profileDetails, result.isSuccess, result.data]);
 
   return { profileDetails, setProfileId };
 };

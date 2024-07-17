@@ -8,9 +8,11 @@ import { useState } from 'react';
 import LoginModal from '../modals/loginModal';
 import { useModalState } from '../modals/hooks';
 import RegisterModal from '../modals/registerModal';
+import { usePoppis } from '@/lib/poppisContext';
 
 const NavBar = () => {
   const { modalState, openModalType, closeModal } = useModalState();
+  const { profileDetails } = usePoppis();
 
   const handleLoginClick = () => {
     openModalType('LOGIN');
@@ -43,7 +45,7 @@ const NavBar = () => {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
-      <LoginButton onClick={handleLoginClick} />
+      {profileDetails ? <p>{ profileDetails.displayName }</p>: <LoginButton onClick={handleLoginClick} />}
 
       <LoginModal isOpen={modalState === "LOGIN"} onRegister={handleRegisterClick} onClose={() => closeModal()} />
       <RegisterModal isOpen={modalState === "REGISTER"} onClose={() => closeModal()} />
