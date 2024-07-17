@@ -5,7 +5,7 @@ const fetchProfileDetails = async (
   userId: string | undefined
 ): Promise<IUser | null> => {
   if (!userId) return null;
-  const response = await fetch(`/api/users/${userId}`);
+  const response = await fetch(`/api/profile/${userId}`);
   return await response.json();
 };
 

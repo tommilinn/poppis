@@ -1,18 +1,16 @@
 import { IUser } from "@/app/api/types";
 import { useQuery } from "@tanstack/react-query";
 
-const fetchAllDetails = async (
-  userId: string | undefined
-): Promise<IUser | null> => {
-  if (!userId) return null;
-  const response = await fetch(`/api/users/${userId}`);
+const fetchAllProfiles = async (
+): Promise<IUser[] | null> => {
+  const response = await fetch(`/api/profile/`);
   return await response.json();
 };
 
-const useAllUserDetails = (userId: string | undefined) =>
+const useAllProfiles = () =>
   useQuery({
     queryKey: ["allProfiles"],
-    queryFn: () => fetchAllDetails(userId),
+    queryFn: () => fetchAllProfiles(),
   });
 
-export default useAllUserDetails;
+export default useAllProfiles;

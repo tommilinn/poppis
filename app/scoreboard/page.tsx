@@ -1,5 +1,6 @@
 "use client"
 
+import useAllProfiles from "@/lib/hooks/useAllUserDetails"
 import { useEffect, useState } from "react"
 
 interface IScoreboard {
@@ -7,18 +8,14 @@ interface IScoreboard {
 }
 
 export default function Scoreboard() {
-  const [list, setList] = useState<string[]>([])
-  useEffect(() => {
-    setList(["IssE", "Jallux", "Miikali"])
+  const {data} = useAllProfiles();
 
-  }, [])
-  console.log(list)
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <ol>
-        {list.map((x, index)=> {
-          return <li key={index}>{x}</li>
-        })}
+        {data ? data.map((x, index)=> {
+          return <li key={index}>{x.username}</li>
+        }): null}
       </ol>
     </main>
   )

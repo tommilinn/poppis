@@ -6,6 +6,12 @@ export async function GET(request: NextRequest) {
   const userId = searchParams.get("userId");
   if (userId) {
     const profile = await getProfileById(userId);
-    return NextResponse.json({ allProfiles: profile }, { status: 200 });
+    if (!profile) {
+      return NextResponse.json(
+        { message: "Profile not found" },
+        { status: 404 }
+      ); 
+    }
+    return NextResponse.json({ profile }, { status: 200 });
   }
 }
