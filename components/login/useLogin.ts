@@ -2,7 +2,7 @@ import { IUser } from "@/app/api/types";
 import { ICredentials } from "./types";
 import { useMutation } from "@tanstack/react-query";
 
-const fetchLogin = async (credentials: ICredentials): Promise<IUser> => {
+const fetchLogin = async (credentials: ICredentials): Promise<string> => {
   if (process.env.NODE_ENV === "development") {
     credentials.username = "testUser";
     credentials.password = "testPass";

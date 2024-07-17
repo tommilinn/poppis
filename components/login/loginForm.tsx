@@ -1,10 +1,19 @@
 "use client";
 
-import { FormEvent } from "react";
-import useLogin from "./useRegister";
+import { FormEvent, useEffect } from "react";
+import useLogin from "./useLogin";
+import { usePoppis } from "@/lib/poppisContext";
 
 const LoginForm = () => {
-  const { mutate } = useLogin(); // Use the useLogin hook
+  const { mutate, data } = useLogin(); // Use the useLogin hook
+  const { setUserId } = usePoppis();
+  
+  useEffect(() => {
+    if (data) {
+      setUserId(data);
+    }
+  }, [data, setUserId]);
+  
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
