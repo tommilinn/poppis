@@ -12,7 +12,8 @@
     "migrate:reset": "npx dotenv -e .env.development.local -- prisma migrate reset",
     "db:seed": "npx dotenv -e .env.development.local -- prisma db seed",
     "prisma:generate": "npx dotenv -e .env.development.local -- prisma generate",
-    "prisma:studio": "npx dotenv -e .env.development.local -- prisma studio"
+    "prisma:studio": "npx dotenv -e .env.development.local -- prisma studio",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^5.8.1",
