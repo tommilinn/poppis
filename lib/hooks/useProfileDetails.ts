@@ -27,7 +27,7 @@ const useProfileDetails = () => {
     if(profileDetails && profileId === undefined) {
       setProfileDetails(undefined);
     }
-  }, [profileId])
+  }, [profileId, profileDetails]);
 
   useEffect(() => {
     if (result.isSuccess && result.data) {

@@ -47,6 +47,14 @@ const NavBar = () => {
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
+
+          {profileDetails && <NavigationMenuItem>
+            <Link href="/profile" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                Profile
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>}
         </NavigationMenuList>
       </NavigationMenu>
       {profileDetails ? (
