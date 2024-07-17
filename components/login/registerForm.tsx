@@ -1,10 +1,10 @@
 "use client";
 
 import { FormEvent } from "react";
-import useLogin from "./hooks";
+import useRegisterUser from "./useRegister";
 
 const RegisterForm = () => {
-  const { registerUser } = useLogin(); // Use the useLogin hook
+  const { mutate, data, isError } = useRegisterUser(); // Use the useLogin hook
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -14,7 +14,7 @@ const RegisterForm = () => {
     const password = formData.get("password")?.toString();
 
     if (username && password) {
-      await registerUser(username, password);
+      mutate({ username, password });
     }
   };
 

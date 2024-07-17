@@ -1,5 +1,5 @@
 import * as bcrypt from "bcrypt";
-import prisma from "../../prisma";
+import prisma from "../../../../lib/prisma";
 
 const client = prisma;
 

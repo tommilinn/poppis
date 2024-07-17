@@ -13,17 +13,23 @@ interface ILoginModalProps {
   onClose: () => void;
 }
 
-const RegisterModal = ({ isOpen, onClose }: ILoginModalProps): JSX.Element | null => {
+const RegisterModal = ({
+  isOpen,
+  onClose,
+}: ILoginModalProps): JSX.Element | null => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   // Close modal when clicked outside
   useEffect(() => {
-      const handleClickOutside = (event: MouseEvent) => {
-        if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-          onClose();
-        }
-      };
-      document.addEventListener("mousedown", handleClickOutside);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        onClose();
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -34,10 +40,9 @@ const RegisterModal = ({ isOpen, onClose }: ILoginModalProps): JSX.Element | nul
       <DialogContent ref={modalRef}>
         <DialogHeader>
           <DialogTitle>Register</DialogTitle>
-            <RegisterForm ></RegisterForm>
-          <DialogDescription>
-          </DialogDescription>
+          <RegisterForm />
         </DialogHeader>
+        <DialogDescription></DialogDescription>
       </DialogContent>
     </Dialog>
   ) : null;

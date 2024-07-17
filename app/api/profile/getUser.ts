@@ -1,6 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-import { IUser } from "../types";
-import prisma from "../prisma";
+import prisma from "../../../lib/prisma";
 
 const client = prisma;
 
