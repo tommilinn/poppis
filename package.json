@@ -15,7 +15,9 @@
     "prisma:studio": "npx dotenv -e .env.development.local -- prisma studio",
     "postinstall": "prisma generate",
     "prisma:seed": "ts-node prisma/seed_achievement.mjs",
-    "prisma:delete:achi": "ts-node prisma/delete_data.mjs"
+    "prisma:delete:achi": "ts-node prisma/delete_data.mjs",
+    "prisma:delete:profile": "ts-node prisma/delete_data_profile.mjs"
+    
   },
   "dependencies": {
     "@prisma/client": "^5.8.1",

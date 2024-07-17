@@ -13,7 +13,11 @@ const fetchRegisterUser = async (
     body: JSON.stringify(credentials),
     mode: "cors",
   });
-  return await response.json();
+  if (response.ok) {
+    return await response.json();
+  } else {
+    throw new Error("Emme onnistuneet luomaan käyttäjää");
+  }
 };
 
 const useRegisterUser = () => {
@@ -27,7 +31,9 @@ const useRegisterUser = () => {
         setProfileId(userId);
       }
     },
-    onError: (error: Error) => {throw Error(error.message)},
+    onError: (error: Error) => {
+      throw Error(error.message);
+    },
   });
 };
 

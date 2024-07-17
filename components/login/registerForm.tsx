@@ -9,7 +9,13 @@ interface IRegisterFormProps {
 }
 
 const RegisterForm = ({ closeModal }: IRegisterFormProps) => {
-  const { mutate, isPending } = useRegisterUser(); // Use the useLogin hook
+  const { mutate, isPending, isSuccess, isError, error } = useRegisterUser(); // Use the useLogin hook
+
+  useEffect(() => {
+    if (isSuccess) {
+      closeModal();
+    }
+  }, [isSuccess, closeModal]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -20,10 +26,12 @@ const RegisterForm = ({ closeModal }: IRegisterFormProps) => {
 
     if (username && password) {
       mutate({ username, password });
-
-      closeModal();
     }
   };
+
+  if (isPending) {
+    return <Spinner middle />;
+  }
 
   if (isPending) {
     return <Spinner />;
@@ -32,6 +40,7 @@ const RegisterForm = ({ closeModal }: IRegisterFormProps) => {
   // Put required after debugging
   return (
     <form onSubmit={handleSubmit}>
+      {isError && <p className="text-red-500 italic">{error.message}</p>}
       <input type="text" name="username" placeholder="username" />
       <input type="password" name="password" placeholder="Password" />
       <button type="submit">Register</button>

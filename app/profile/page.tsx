@@ -1,6 +1,6 @@
 "use client";
 
-import useAllProfiles from "@/lib/hooks/useAllUserDetails";
+import useProfiles from "@/lib/hooks/useProfiles";
 import { usePoppis } from "@/lib/poppisContext";
 
 export default function Scoreboard() {
