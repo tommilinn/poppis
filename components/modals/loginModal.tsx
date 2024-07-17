@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import LoginForm from "../login/loginForm";
 import { Button } from "../ui/button";

@@ -2,13 +2,14 @@
 
 import { FormEvent, useEffect } from "react";
 import useLogin from "./useLogin";
+import Spinner from "../ui/spinner";
 
 interface ILoginFormProps {
   closeModal: () => void;
 }
 
 const LoginForm = ({ closeModal }: ILoginFormProps) => {
-  const { mutate } = useLogin(); // Use the useLogin hook
+  const { mutate, isPending } = useLogin(); // Use the useLogin hook
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -22,6 +23,9 @@ const LoginForm = ({ closeModal }: ILoginFormProps) => {
       closeModal()
     }
   };
+  if(isPending) {
+    return <Spinner />
+  }
   // Put required after debugging
   return (
     <form onSubmit={handleSubmit}>

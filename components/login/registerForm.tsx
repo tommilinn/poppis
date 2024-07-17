@@ -4,12 +4,11 @@ import { FormEvent, useEffect } from "react";
 import useRegisterUser from "./useRegister";
 import Spinner from "../ui/spinner";
 
-
 interface IRegisterFormProps {
   closeModal: () => void;
 }
 
-const RegisterForm = ({closeModal}: IRegisterFormProps) => {
+const RegisterForm = ({ closeModal }: IRegisterFormProps) => {
   const { mutate, isPending } = useRegisterUser(); // Use the useLogin hook
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -26,8 +25,7 @@ const RegisterForm = ({closeModal}: IRegisterFormProps) => {
     }
   };
 
-  if(isPending) {
-    
+  if (isPending) {
     return <Spinner />;
   }
 

@@ -40,7 +40,7 @@ const RegisterModal = ({
       <DialogContent ref={modalRef}>
         <DialogHeader>
           <DialogTitle>Register</DialogTitle>
-          <RegisterForm closeModal={onClose}/>
+          <RegisterForm closeModal={onClose} />
         </DialogHeader>
         <DialogDescription></DialogDescription>
       </DialogContent>

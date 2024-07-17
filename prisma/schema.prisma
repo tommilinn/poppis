@@ -10,15 +10,36 @@ datasource db {
     directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-model Profile {
-    id              String @id @default(uuid())
-    username        String @unique
-    displayName     String
-    auth            Auth   @relation(fields: [id], references: [id])
-}
-
 model Auth {
     id              String @id @default(uuid())
     password        String
     user            Profile?
 }
+
+model Profile {
+    id              String @id @default(uuid())
+    username        String @unique
+    displayName     String
+    auth            Auth   @relation(fields: [id], references: [id])
+    achievements    Achievements[]
+}
+
+model Achievements {
+    profileId           String         // Foreign key
+    profile             Profile        @relation(fields: [profileId], references: [id])
+    achievementTypeId   Int          // Foreign key
+    achievementType     AchievementType @relation(fields: [achievementTypeId], references: [id])
+
+    @@id([profileId, achievementTypeId])
+    @@unique([profileId, achievementTypeId])
+}
+
+model AchievementType {
+    id              Int            @id @default(autoincrement())
+    name            String         @unique
+    Points          Int
+    description     String?
+    group           String?
+    achievements    Achievements[] // One-to-many relationship
+}
+

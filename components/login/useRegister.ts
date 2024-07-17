@@ -27,7 +27,7 @@ const useRegisterUser = () => {
         setProfileId(userId);
       }
     },
-    onError: (error: Error) => console.error(error.message),
+    onError: (error: Error) => {throw Error(error.message)},
   });
 };
 
