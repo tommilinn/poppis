@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     // Change testuser with your actual database query
     const userId = await createUserWithAuth(username, displayName, password);
 
-    return NextResponse.json({ userId }, { status: 200 });
+    return NextResponse.json(userId, { status: 200 });
   } catch (error) {
     return NextResponse.json(
       { error: (error as Error).message },
