@@ -1,5 +1,6 @@
 import { IUser } from "@/app/api/types";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, UseQueryOptions } from "@tanstack/react-query";
+import { useState } from "react";
 
 const fetchProfileDetails = async (
   userId: string | undefined
@@ -9,10 +10,16 @@ const fetchProfileDetails = async (
   return await response.json();
 };
 
-const useProfileDetails = (userId: string | undefined) =>
-  useQuery({
-    queryKey: ["userDetails"],
-    queryFn: () => fetchProfileDetails(userId),
-  });
+const useProfileDetails = (id: string | undefined) => {
+  const [profileId, setProfileId] = useState(id);
+  const [profileDetails, setProfileDetails] = useState<IUser | null>(null);
 
+  const result = useQuery<IUser | null, Error>({
+    queryKey: ["profileDetails", profileId],
+    queryFn: () => fetchProfileDetails(profileId),
+    onSuccess: (data: IUser | null) => setProfileDetails(data),
+  } as UseQueryOptions<IUser | null, Error>);
+
+  return { profileDetails, setProfileId };
+};
 export default useProfileDetails;

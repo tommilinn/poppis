@@ -2,6 +2,7 @@ import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthWithUsername } from "./getAuthWithUsername";
+import { cookies } from "next/headers";
 
 interface AuthRequestBody {
     username: string;
@@ -32,8 +33,9 @@ export async function POST(
       }
       
       const token = jwt.sign(username, process.env.JWT_SECRET ?? "Is this a risk?");
-  
-      return NextResponse.json({ token }, { status: 200 });
+      cookies().set("Authorization", `Bearer ${token}`)
+
+      return NextResponse.json({ userId: dbuser.id }, { status: 200 });
     } catch (error) {
       return NextResponse.json(
         { error: (error as Error).message },

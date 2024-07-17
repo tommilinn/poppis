@@ -5,8 +5,8 @@ import useProfileDetails from "@/lib/hooks/useProfileDetails";
 import { createContext, useContext, ReactNode } from "react";
 
 interface PoppisContextType {
-  setUserId: (id: string | undefined) => void;
-  userDetails: IUser | null;
+  setProfileId?: (id: string | undefined) => void;
+  profileDetails: IUser | null;
 }
 
 const PoppisContext = createContext<PoppisContextType | undefined>(undefined);
@@ -14,10 +14,10 @@ const PoppisContext = createContext<PoppisContextType | undefined>(undefined);
 export const PoppisProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const { data } = useProfileDetails(undefined);
+  const { profileDetails, setProfileId } = useProfileDetails(undefined);
   
   return (
-    <PoppisContext.Provider value={{setUserId: useProfileDetails,  userDetails: data ?? null}}>
+    <PoppisContext.Provider value={{setProfileId,  profileDetails: profileDetails ?? null}}>
       {children}
     </PoppisContext.Provider>
   );

@@ -45,7 +45,7 @@ const LoginModal = ({
     <Dialog open={isOpen} modal>
       <DialogContent ref={modalRef}>
         <DialogTitle>Log in</DialogTitle>
-        <LoginForm></LoginForm>
+        <LoginForm closeModal={onClose}></LoginForm>
         <DialogDescription>
           <Button onClick={onRegister}>Register</Button>
         </DialogDescription>

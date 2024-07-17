@@ -2,18 +2,13 @@
 
 import { FormEvent, useEffect } from "react";
 import useLogin from "./useLogin";
-import { usePoppis } from "@/lib/poppisContext";
 
-const LoginForm = () => {
-  const { mutate, data } = useLogin(); // Use the useLogin hook
-  const { setUserId } = usePoppis();
-  
-  useEffect(() => {
-    if (data) {
-      setUserId(data);
-    }
-  }, [data, setUserId]);
-  
+interface ILoginFormProps {
+  closeModal: () => void;
+}
+
+const LoginForm = ({ closeModal }: ILoginFormProps) => {
+  const { mutate } = useLogin(); // Use the useLogin hook
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -24,10 +19,9 @@ const LoginForm = () => {
 
     if (username && password) {
       mutate({ username, password });
+      closeModal()
     }
-
   };
-
   // Put required after debugging
   return (
     <form onSubmit={handleSubmit}>

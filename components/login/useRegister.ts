@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { ICredentials } from "./types";
+import { usePoppis } from "@/lib/poppisContext";
 
 const fetchRegisterUser = async (
   credentials: ICredentials
@@ -15,10 +16,19 @@ const fetchRegisterUser = async (
   return await response.json();
 };
 
-const useRegisterUser = () =>
-  useMutation({
+const useRegisterUser = () => {
+  const { setProfileId } = usePoppis();
+
+  return useMutation({
     mutationKey: ["registerUser"],
     mutationFn: (credentials: ICredentials) => fetchRegisterUser(credentials),
+    onSuccess: (userId: string) => {
+      if (setProfileId) {
+        setProfileId(userId);
+      }
+    },
+    onError: (error: Error) => console.error(error.message),
   });
+};
 
 export default useRegisterUser;
