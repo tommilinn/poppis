@@ -8,17 +8,15 @@ interface AuthRequestBody {
   displayName?: string;
 }
 
-export async function POST(
-  req: NextRequest
-) {
+export async function POST(req: NextRequest) {
   try {
-    const body: AuthRequestBody  = await req.json();
+    const body: AuthRequestBody = await req.json();
     const { username, password } = body;
     const displayName = body.displayName || username;
-    
+
     // Change testuser with your actual database query
     const userId = await createUserWithAuth(username, displayName, password);
-    
+
     return NextResponse.json({ userId }, { status: 200 });
   } catch (error) {
     return NextResponse.json(
@@ -27,4 +25,3 @@ export async function POST(
     );
   }
 }
-

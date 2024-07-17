@@ -11,7 +11,6 @@ import RegisterModal from '../modals/registerModal';
 
 const NavBar = () => {
   const { modalState, openModalType, closeModal } = useModalState();
-  const { isLogged, checkIsLogged } = useUserLogin();
 
   const handleLoginClick = () => {
     openModalType('LOGIN');
@@ -44,7 +43,7 @@ const NavBar = () => {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
-      <LoginButton isLogged={isLogged} checkIsLogged={checkIsLogged} onClick={handleLoginClick} />
+      <LoginButton onClick={handleLoginClick} />
 
       <LoginModal isOpen={modalState === "LOGIN"} onRegister={handleRegisterClick} onClose={() => closeModal()} />
       <RegisterModal isOpen={modalState === "REGISTER"} onClose={() => closeModal()} />

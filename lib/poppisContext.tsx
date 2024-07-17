@@ -1,10 +1,12 @@
+"use client"
+
 import { IUser } from "@/app/api/types";
-import useUserDetails from "@/lib/hooks/useUserDetails";
-import { createContext, useContext, useState, ReactNode } from "react";
+import useProfileDetails from "@/lib/hooks/useProfileDetails";
+import { createContext, useContext, ReactNode } from "react";
 
 interface PoppisContextType {
   setUserId: (id: string | undefined) => void;
-  userDetails?: IUser;
+  userDetails: IUser | null;
 }
 
 const PoppisContext = createContext<PoppisContextType | undefined>(undefined);
@@ -12,10 +14,10 @@ const PoppisContext = createContext<PoppisContextType | undefined>(undefined);
 export const PoppisProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const { data } = useUserDetails(undefined);
-
+  const { data } = useProfileDetails(undefined);
+  
   return (
-    <PoppisContext.Provider value={{setUserId: useUserDetails,  userDetails: data}}>
+    <PoppisContext.Provider value={{setUserId: useProfileDetails,  userDetails: data ?? null}}>
       {children}
     </PoppisContext.Provider>
   );
