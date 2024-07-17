@@ -1,6 +1,5 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { ICredentials } from "./types";
-import { IUser } from "@/app/api/types";
 
 const fetchRegisterUser = async (
   credentials: ICredentials
