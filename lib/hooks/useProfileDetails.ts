@@ -1,29 +1,39 @@
 import { IUser } from "@/app/api/types";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
+import { profile } from "console";
 import { useEffect, useState } from "react";
 
 const fetchProfileDetails = async (
   userId: string | undefined
-): Promise<IUser | null> => {
-  if (!userId) return null;
+): Promise<IUser> => {
+  if (!userId) throw Error("User ID is required");
   const response = await fetch(`/api/profile/${userId}`);
   return await response.json();
 };
 
-const useProfileDetails = (id: string | undefined) => {
-  const [profileId, setProfileId] = useState(id);
-  const [profileDetails, setProfileDetails] = useState<IUser | null>(null);
+const useProfileDetails = () => {
+  const [profileId, setProfileId] = useState<string | undefined>(undefined);
+  const [profileDetails, setProfileDetails] = useState<IUser | undefined>(
+    undefined
+  );
 
-  const result = useQuery<IUser | null, Error>({
+  const result = useQuery<IUser, Error>({
     queryKey: ["profileDetails", profileId],
-    queryFn: () => fetchProfileDetails(profileId)
+    queryFn: () => fetchProfileDetails(profileId),
+    enabled: !!profileId,
   });
-  
+
   useEffect(() => {
-    if(result.isSuccess && profileDetails === null) {
+    if(profileDetails && profileId === undefined) {
+      setProfileDetails(undefined);
+    }
+  }, [profileId])
+
+  useEffect(() => {
+    if (result.isSuccess && result.data) {
       setProfileDetails(result.data);
     }
-  }, [profileDetails, result.isSuccess, result.data]);
+  }, [result.isSuccess, result.data]);
 
   return { profileDetails, setProfileId };
 };

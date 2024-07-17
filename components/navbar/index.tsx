@@ -1,33 +1,37 @@
 "use client";
 
-import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu';
-import { LoginButton } from './LoginButton'
-import useUserLogin from './hooks';
-import Link from 'next/link';
-import { useState } from 'react';
-import LoginModal from '../modals/loginModal';
-import { useModalState } from '../modals/hooks';
-import RegisterModal from '../modals/registerModal';
-import { usePoppis } from '@/lib/poppisContext';
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+import { LoginButton } from "./LoginButton";
+import Link from "next/link";
+import LoginModal from "../modals/loginModal";
+import { useModalState } from "../modals/hooks";
+import RegisterModal from "../modals/registerModal";
+import { usePoppis } from "@/lib/poppisContext";
+import LogoutButton from "./LogoutButton";
 
 const NavBar = () => {
   const { modalState, openModalType, closeModal } = useModalState();
   const { profileDetails } = usePoppis();
 
   const handleLoginClick = () => {
-    openModalType('LOGIN');
+    openModalType("LOGIN");
   };
 
   const handleRegisterClick = () => {
-    openModalType('REGISTER');
+    openModalType("REGISTER");
   };
 
   return (
-    <div className='flex w-full justify-between items-center'>
-      <div className='p-5'>POPPIS</div>
-      <NavigationMenu className='w-full'>
-
-        <NavigationMenuList className=''>
+    <div className="flex w-full justify-between items-center">
+      <div className="p-5">POPPIS</div>
+      <NavigationMenu className="w-full">
+        <NavigationMenuList className="">
           <NavigationMenuItem>
             <Link href="/" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
@@ -45,12 +49,23 @@ const NavBar = () => {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
-      {profileDetails ? <p>{ profileDetails.displayName }</p>: <LoginButton onClick={handleLoginClick} />}
+      {profileDetails ? (
+        <LogoutButton />
+      ) : (
+        <LoginButton onClick={handleLoginClick} />
+      )}
 
-      <LoginModal isOpen={modalState === "LOGIN"} onRegister={handleRegisterClick} onClose={() => closeModal()} />
-      <RegisterModal isOpen={modalState === "REGISTER"} onClose={() => closeModal()} />
+      <LoginModal
+        isOpen={modalState === "LOGIN"}
+        onRegister={handleRegisterClick}
+        onClose={() => closeModal()}
+      />
+      <RegisterModal
+        isOpen={modalState === "REGISTER"}
+        onClose={() => closeModal()}
+      />
     </div>
-  )
-}
+  );
+};
 
 export default NavBar;

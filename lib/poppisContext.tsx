@@ -6,7 +6,7 @@ import { createContext, useContext, ReactNode } from "react";
 
 interface PoppisContextType {
   setProfileId?: (id: string | undefined) => void;
-  profileDetails: IUser | null;
+  profileDetails: IUser | undefined;
 }
 
 const PoppisContext = createContext<PoppisContextType | undefined>(undefined);
@@ -14,10 +14,11 @@ const PoppisContext = createContext<PoppisContextType | undefined>(undefined);
 export const PoppisProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const { profileDetails, setProfileId } = useProfileDetails(undefined);
+
+  const { profileDetails, setProfileId } = useProfileDetails();
   
   return (
-    <PoppisContext.Provider value={{setProfileId,  profileDetails: profileDetails ?? null}}>
+    <PoppisContext.Provider value={{setProfileId,  profileDetails: profileDetails ?? undefined}}>
       {children}
     </PoppisContext.Provider>
   );
