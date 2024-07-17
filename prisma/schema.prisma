@@ -37,7 +37,7 @@ model Achievements {
 model AchievementType {
     id              Int            @id @default(autoincrement())
     name            String         @unique
-    Points          Int
+    points          Int
     description     String?
     group           String?
     achievements    Achievements[] // One-to-many relationship

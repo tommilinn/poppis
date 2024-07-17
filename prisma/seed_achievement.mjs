@@ -9,7 +9,7 @@ async function main() {
   await prisma.achievementType.create({
     data: {
       name: "4H kalareissu",
-      Points: 5,
+      points: 5,
       description: "Heitä kisoissa 4 haukea putkeen.",
     },
   });
@@ -17,7 +17,7 @@ async function main() {
   await prisma.achievementType.create({
     data: {
       name: "Pulukone",
-      Points: 2,
+      points: 2,
       description:
         "Heitä puhdas pulu. Tämä tarkoittaa kolmea tornia puhtaasti, niin, että jäljelle jää yksittäiset tolpat eikä roskia.",
     },
@@ -25,7 +25,7 @@ async function main() {
   await prisma.achievementType.create({
     data: {
       name: "Boittaja!",
-      Points: 2,
+      points: 2,
       description: "Tule ensimmäiseksi B-sarjan henkilökohtaisessa kilpailussa",
       group: "Henkilökohtaiset-kilpailut",
     },
@@ -33,7 +33,7 @@ async function main() {
   await prisma.achievementType.create({
     data: {
       name: "Parasta A-luokkaa!",
-      Points: 4,
+      points: 4,
       description: "Tule ensimmäiseksi A-sarjan henkilökohtaisessa kilpailussa",
       group: "Henkilökohtaiset-kilpailut",
     },
@@ -42,7 +42,7 @@ async function main() {
   await prisma.achievementType.create({
     data: {
       name: "Menestys!",
-      Points: 7,
+      points: 7,
       description: "Tule ensimmäiseksi Mestaruus-sarjan henkilökohtaisessa kilpailussa",
       group: "Henkilökohtaiset-kilpailut",
     },

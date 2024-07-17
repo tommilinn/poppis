@@ -35,7 +35,7 @@ const NavBar = () => {
           <NavigationMenuItem>
             <Link href="/" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Home
+                Etusivu
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
@@ -43,7 +43,15 @@ const NavBar = () => {
           <NavigationMenuItem>
             <Link href="/scoreboard" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Scoreboard
+                Menestyjät
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <Link href="/achievements" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                Saavutukset
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
@@ -51,7 +59,7 @@ const NavBar = () => {
           {profileDetails && <NavigationMenuItem>
             <Link href="/profile" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Profile
+                Sinä
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>}
