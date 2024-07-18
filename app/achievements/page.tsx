@@ -15,7 +15,7 @@ import Spinner from "@/components/ui/spinner";
 const Achievements = () => {
   const { achievements, isLoading } = useAchievements();
   if (isLoading)
-    return <Spinner className="flex justify-center items-center" />;
+    return <Spinner middle/>;
   return (
     <Table className="text-sm w-4/5 mx-auto mt-4">
       <TableHeader>

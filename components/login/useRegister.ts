@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { ICredentials } from "./types";
-import { usePoppis } from "@/lib/poppisContext";
+import { usePoppis } from "@/lib/context/poppisContext";
 
 const fetchRegisterUser = async (
   credentials: ICredentials

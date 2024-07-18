@@ -1,7 +1,13 @@
 import { IUser } from "@/app/api/types";
-import { useQuery, UseQueryOptions } from "@tanstack/react-query";
-import { profile } from "console";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import jwt, { JwtPayload } from "jsonwebtoken"; // Import the jsonwebtoken library
+import { cookies } from "next/headers";
+
+
+interface MyJwtPayload extends JwtPayload {
+  userId: string;
+}
 
 const fetchProfileDetails = async (
   userId: string | undefined
@@ -24,7 +30,7 @@ const useProfileDetails = () => {
   });
 
   useEffect(() => {
-    if(profileDetails && profileId === undefined) {
+    if (profileDetails && profileId === undefined) {
       setProfileDetails(undefined);
     }
   }, [profileId, profileDetails]);

@@ -1,7 +1,7 @@
 "use client";
 
 import useProfiles from "@/lib/hooks/useProfiles";
-import { usePoppis } from "@/lib/poppisContext";
+import { usePoppis } from "@/lib/context/poppisContext";
 
 export default function Scoreboard() {
   const { profileDetails } = usePoppis();

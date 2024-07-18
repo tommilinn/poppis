@@ -12,7 +12,7 @@ import Link from "next/link";
 import LoginModal from "../modals/loginModal";
 import { useModalState } from "../modals/hooks";
 import RegisterModal from "../modals/registerModal";
-import { usePoppis } from "@/lib/poppisContext";
+import { usePoppis } from "@/lib/context/poppisContext";
 import LogoutButton from "./LogoutButton";
 
 const NavBar = () => {

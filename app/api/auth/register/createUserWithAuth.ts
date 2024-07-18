@@ -9,8 +9,7 @@ export const createUserWithAuth = async (
   password: string
 ): Promise<string> => {
   password = await bcrypt.hash(password, 10);
-
-
+  
   const auth = await client.profile.create({
     data: {
       username,

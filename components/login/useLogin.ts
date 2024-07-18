@@ -1,7 +1,7 @@
 import { IUser } from "@/app/api/types";
 import { ICredentials } from "./types";
 import { useMutation } from "@tanstack/react-query";
-import { PoppisProvider, usePoppis } from "@/lib/poppisContext";
+import { PoppisProvider, usePoppis } from "@/lib/context/poppisContext";
 import { setPriority } from "os";
 
 const fetchLogin = async (credentials: ICredentials): Promise<string> => {

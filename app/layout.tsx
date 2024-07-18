@@ -4,7 +4,7 @@ import "./globals.css";
 import NavBar from "@/components/navbar";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ReactQueryProvider } from "@/lib/queryClient";
-import { PoppisProvider } from "@/lib/poppisContext";
+import { PoppisProvider } from "@/lib/context/poppisContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,10 +22,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ReactQueryProvider>
-          <PoppisProvider>
-            <NavBar />
-            {children}
-          </PoppisProvider>
+            <PoppisProvider>
+              <NavBar />
+              {children}
+            </PoppisProvider>
           <ReactQueryDevtools />
         </ReactQueryProvider>
       </body>

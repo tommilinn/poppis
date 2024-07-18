@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { usePoppis } from "@/lib/poppisContext";
+import { usePoppis } from "@/lib/context/poppisContext";
 
 
 export const LogoutButton = () => {
