@@ -38,8 +38,25 @@ model AchievementType {
     id              Int            @id @default(autoincrement())
     name            String         @unique
     points          Int
+    categoryId      Int
     description     String?
-    group           String?
+    groupId         Int?
+    category        CategoryType? @relation(fields: [categoryId], references: [id])
+    group           AchievementGroup? @relation(fields: [groupId], references: [id])
     achievements    Achievements[] // One-to-many relationship
+    
 }
 
+model AchievementGroup {
+    id              Int            @id @default(autoincrement())
+    name            String         @unique
+    description     String?
+    achievementTypes AchievementType[] // One-to-many relationship
+}
+
+model CategoryType {
+    id              Int            @id @default(autoincrement())
+    name            String         @unique
+    description     String?
+    achievementTypes AchievementType[] // One-to-many relationship
+}

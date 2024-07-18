@@ -16,7 +16,9 @@
     "postinstall": "prisma generate",
     "prisma:seed": "ts-node prisma/seed_achievement.mjs",
     "prisma:delete:achi": "ts-node prisma/delete_data.mjs",
-    "prisma:delete:profile": "ts-node prisma/delete_data_profile.mjs"
+    "prisma:delete:profile": "ts-node prisma/delete_data_profile.mjs",
+    "prisma:clear": "npx prisma db push --force-reset"
+
     
   },
   "dependencies": {
