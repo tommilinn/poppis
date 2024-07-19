@@ -1,6 +1,6 @@
 import { IUser } from "@/app/api/types";
 import { ICredentials } from "./types";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { PoppisProvider, usePoppis } from "@/lib/context/poppisContext";
 import { setPriority } from "os";
 
@@ -21,7 +21,7 @@ const fetchLogin = async (credentials: ICredentials): Promise<string> => {
   }
 };
 
-const useLogin = (callBackAfterSuccess?: () => void) => {
+const useLogin = () => {
   const { setProfileId } = usePoppis();
 
   const loginMutation = useMutation({
@@ -30,9 +30,6 @@ const useLogin = (callBackAfterSuccess?: () => void) => {
     onSuccess: (userId: string) => {
       if (setProfileId) {
         setProfileId(userId);
-        if (callBackAfterSuccess) {
-          callBackAfterSuccess();
-        }
       }
     },
     onError: (error: Error) => {

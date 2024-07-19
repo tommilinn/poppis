@@ -8,6 +8,7 @@ const handleLogout = () => {
     if(setProfileId) {
         setProfileId(undefined);
     }
+    document.cookie = "Authorization=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax";
   };
 
   return (

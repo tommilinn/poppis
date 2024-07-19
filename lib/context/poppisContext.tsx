@@ -1,6 +1,7 @@
 "use client";
 
 import { IUser } from "@/app/api/types";
+import useLogin from "@/components/login/useLogin";
 import useProfileDetails from "@/lib/hooks/useProfileDetails";
 import { createContext, useContext, ReactNode, useEffect } from "react";
 
@@ -19,25 +20,19 @@ export const PoppisProvider: React.FC<{ children: ReactNode }> = ({
   useEffect(() => {
     const checkAuthentication = async () => {
       try {
-        const token = document.cookie
-          .split("; ")
-          .find((row) => row.startsWith("Authorization="))
-          ?.split("=")[1];
-          console.log(token);
-        if (token?.startsWith("Bearer ")) {
-          console.log("haloo")
-          const response = await fetch("/api/authentication/login/token", {
-            method: "GET",
-            credentials: "include",
-          });
-
-          if (response.ok) {
-            const data = await response.json();
-            console.log(data);
-            // setProfileId(data.userId);
-          } else {
-            console.error("Failed to authenticate");
-          }
+        const response = await fetch("/api/auth/login/token", {
+          method: "GET",
+          credentials: "include",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.ok) {
+          const userId = await response.json();
+          setProfileId(userId);
+        } else {
+          console.error("Failed to authenticate");
         }
       } catch (error) {
         console.error("Error during authentication check", error);
