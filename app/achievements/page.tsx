@@ -22,7 +22,6 @@ const Achievements = () => {
         <TableRow>
           <TableHead className="px-2 py-1">Nimi</TableHead>
           <TableHead className="px-2 py-1">Kuvaus</TableHead>
-          <TableHead className="px-2 py-1">Ryhmä</TableHead>
           <TableHead className="px-2 py-1">Pisteet</TableHead>
         </TableRow>
       </TableHeader>
@@ -36,9 +35,6 @@ const Achievements = () => {
                 </TableCell>
                 <TableCell key={achievement.id + ++index}>
                   {achievement.description}
-                </TableCell>
-                <TableCell key={achievement.id + ++index}>
-                  {achievement.group}
                 </TableCell>
                 <TableCell key={achievement.id + ++index}>
                   {achievement.points}

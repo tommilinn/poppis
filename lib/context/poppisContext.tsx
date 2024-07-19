@@ -8,6 +8,7 @@ import { createContext, useContext, ReactNode, useEffect } from "react";
 interface PoppisContextType {
   setProfileId?: (id: string | undefined) => void;
   profileDetails: IUser | undefined;
+  isLoggedIn: boolean;
 }
 
 const PoppisContext = createContext<PoppisContextType | undefined>(undefined);
@@ -15,7 +16,7 @@ const PoppisContext = createContext<PoppisContextType | undefined>(undefined);
 export const PoppisProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const { profileDetails, setProfileId } = useProfileDetails();
+  const { profileDetails, setProfileId, isLoggedIn } = useProfileDetails();
 
   useEffect(() => {
     const checkAuthentication = async () => {
@@ -40,11 +41,11 @@ export const PoppisProvider: React.FC<{ children: ReactNode }> = ({
     };
 
     checkAuthentication();
-  }, []);
+  }, [setProfileId]);
 
   return (
     <PoppisContext.Provider
-      value={{ setProfileId, profileDetails: profileDetails ?? undefined }}
+      value={{ setProfileId, profileDetails: profileDetails ?? undefined, isLoggedIn }}
     >
       {children}
     </PoppisContext.Provider>

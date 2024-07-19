@@ -17,7 +17,7 @@ import LogoutButton from "./LogoutButton";
 
 const NavBar = () => {
   const { modalState, openModalType, closeModal } = useModalState();
-  const { profileDetails } = usePoppis();
+  const { profileDetails, isLoggedIn } = usePoppis();
 
   const handleLoginClick = () => {
     openModalType("LOGIN");
@@ -56,7 +56,15 @@ const NavBar = () => {
             </Link>
           </NavigationMenuItem>
 
-          {profileDetails && <NavigationMenuItem>
+          {isLoggedIn && <NavigationMenuItem>
+            <Link href="/achievements/hunter" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              🏆 Metsästys 🏆
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>}
+
+          {isLoggedIn && <NavigationMenuItem>
             <Link href="/profile" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 Sinä

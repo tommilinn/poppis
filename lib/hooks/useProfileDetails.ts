@@ -23,6 +23,7 @@ const useProfileDetails = () => {
     undefined
   );
 
+
   const result = useQuery<IUser, Error>({
     queryKey: ["profileDetails", profileId],
     queryFn: () => fetchProfileDetails(profileId),
@@ -40,7 +41,9 @@ const useProfileDetails = () => {
       setProfileDetails(result.data);
     }
   }, [result.isSuccess, result.data]);
+  
+  const isLoggedIn = !!profileDetails;
 
-  return { profileDetails, setProfileId };
+  return { profileDetails, setProfileId, isLoggedIn };
 };
 export default useProfileDetails;

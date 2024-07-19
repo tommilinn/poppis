@@ -10,7 +10,7 @@ async function main() {
       { name: "Heitot" },
       { name: "Kisat" },
       { name: "Pelimuodot" },
-      { name: "Memes" },
+      { name: "Kekeily" },
     ],
   });
 
@@ -31,7 +31,7 @@ async function main() {
       name: "4H kalareissu",
       points: 5,
       description: "Heitä kisoissa 4 haukea putkeen.",
-      category: { connect: { name: "Memes" } },
+      category: { connect: { name: "Kekeily" } },
     },
   });
 
