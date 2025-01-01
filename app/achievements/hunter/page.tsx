@@ -1,11 +1,13 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
 import Spinner from "@/components/ui/spinner";
 import useAchievementCategories from "@/lib/hooks/useAchievementsCategories";
+import { createCard } from "./util";
 
 const Hunting = () => {
-  const { categories, isLoading } = useAchievementCategories();
+  const includeAchievements = true;
+  const { categories, isLoading } =
+    useAchievementCategories(includeAchievements);
 
   return (
     <div className="flex flex-col items-center">
@@ -13,14 +15,16 @@ const Hunting = () => {
       {isLoading ? (
         <Spinner middle />
       ) : (
-        categories.length &&
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-4xl">
-          {categories.map((category, index) => (
-            <Card key={index} className="flex justify-center items-center">
-              <h3>{category.name}</h3>
-            </Card>
-          ))}
-        </div>
+        categories.length && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-4xl">
+            {categories.map((card, index) =>
+              createCard(index, {
+                name: card.name,
+                achievements: card.achievementTypes,
+              })
+            )}
+          </div>
+        )
       )}
     </div>
   );

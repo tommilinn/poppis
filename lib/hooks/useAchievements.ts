@@ -1,12 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-
-interface IAchievement {
-  id: number;
-  name: string;
-  points: number;
-  description?: string;
-  group?: string;
-}
+import { IAchievement } from "@/lib/types";
 
 const fetchAchievements = async () => {
   const response = await fetch("/api/achievements");
