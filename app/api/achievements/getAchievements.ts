@@ -3,11 +3,18 @@ import prisma from "../../../lib/prisma";
 const client = prisma;
 
 export const getAchievements = async () => {
-  const achievements = client.achievementType.findMany({});;
+  try {
+    const achievements = await client.achievementType.findMany({});
 
-  if (!achievements) {
+    if (!achievements || achievements.length === 0) {
+      throw new Error(`No achievements found`);
+    }
+
+    return achievements;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Error fetching achievements: ${error.message}`);
+    }
     throw new Error(`Error fetching achievements`);
   }
-
-  return achievements;
 };

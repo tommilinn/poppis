@@ -17,8 +17,8 @@ const Hunting = () => {
       ) : (
         categories.length && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-4xl">
-            {categories.map((card, index) =>
-              createCard(index, {
+            {categories.map((card) =>
+              createCard( {
                 name: card.name,
                 achievements: card.achievementTypes,
               })

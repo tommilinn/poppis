@@ -1,26 +1,25 @@
-import { IAchievement, IAchievementCategory } from "@/lib/types";
-import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Card } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+import { IAchievement } from "@/lib/types";
+import { JSX } from "react";
 
 interface ICardDetails {
   name: string;
   achievements: IAchievement[];
 }
-export const createCard = (index: number, cardDetails: ICardDetails): JSX.Element => {
+export const createCard = (cardDetails: ICardDetails): JSX.Element => {
   return (
-    <Card key={index} className="flex justify-center items-center">
+    <Card key={cardDetails.name} className="flex justify-center items-center">
       <h3>{cardDetails.name}</h3>
 
       <Table>
         <TableBody>
-          {cardDetails.achievements.map((achievement, index) => {
+          {cardDetails.achievements.map((achievement, rowIndex) => {
             return (
-              <TableRow key={index}>
-                <TableCell key={achievement.id}>{achievement.name}</TableCell>
-                <TableCell key={achievement.id}>
-                  {achievement.description}
-                </TableCell>
-                <TableCell key={achievement.id}>{achievement.points}</TableCell>
+              <TableRow key={`${cardDetails.name}-${rowIndex}`}>
+                <TableCell>{achievement.name}</TableCell>
+                <TableCell>{achievement.description}</TableCell>
+                <TableCell>{achievement.points}</TableCell>
               </TableRow>
             );
           })}
