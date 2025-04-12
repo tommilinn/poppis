@@ -10,12 +10,16 @@ datasource db {
     directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
+// Auth model - Handles user authentication
+// Stores password and links to a user profile
 model Auth {
     id              String @id @default(uuid())
     password        String
     user            Profile?
 }
 
+// Profile model - Represents user information
+// Contains display information and links to user achievements
 model Profile {
     id              String @id @default(uuid())
     username        String @unique
@@ -24,6 +28,8 @@ model Profile {
     achievements    Achievements[]
 }
 
+// Achievements model - Junction table for user achievements
+// Links profiles to specific achievement types they've earned
 model Achievements {
     profileId           String         // Foreign key
     profile             Profile        @relation(fields: [profileId], references: [id])
@@ -34,6 +40,8 @@ model Achievements {
     @@unique([profileId, achievementTypeId])
 }
 
+// AchievementType model - Defines specific achievements users can earn
+// Includes point value, category classification, and optional grouping
 model AchievementType {
     id              Int            @id @default(autoincrement())
     name            String         @unique
@@ -47,6 +55,8 @@ model AchievementType {
     
 }
 
+// AchievementGroup model - Groups related achievements together
+// Allows organizing achievements in logical collections
 model AchievementGroup {
     id              Int            @id @default(autoincrement())
     name            String         @unique
@@ -54,6 +64,8 @@ model AchievementGroup {
     achievementTypes AchievementType[] // One-to-many relationship
 }
 
+// CategoryType model - Classifies achievements into categories
+// Provides a way to organize achievements by type or theme
 model CategoryType {
     id              Int            @id @default(autoincrement())
     name            String         @unique
