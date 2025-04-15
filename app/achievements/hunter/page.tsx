@@ -21,9 +21,9 @@ const Hunting = () => {
         <Spinner middle />
       ) : (
         categories.length > 0 && (
-          <Accordion type="single" collapsible className="w-full max-w-md">
+          <Accordion type="single" collapsible className="w-full max-w-md" defaultValue={categories[0].name}>
             {categories.map((category, index) => (
-              <AccordionItem key={`category-${index}`} value={`category-${index}`}>
+              <AccordionItem key={`category-${index}`} value={`${category.name}`}>
                 <AccordionTrigger className="font-semibold">
                   {category.name}
                 </AccordionTrigger>
