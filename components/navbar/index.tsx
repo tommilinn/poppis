@@ -1,23 +1,20 @@
 "use client";
 
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
-import { LoginButton } from "./LoginButton";
-import Link from "next/link";
-import LoginModal from "../modals/loginModal";
-import { useModalState } from "../modals/hooks";
-import RegisterModal from "../modals/registerModal";
+import { Button } from "@/components/ui/button";
 import { usePoppis } from "@/lib/context/poppisContext";
-import LogoutButton from "./LogoutButton";
+import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+import { useModalState } from "../modals/hooks";
+import LoginModal from "../modals/loginModal";
+import RegisterModal from "../modals/registerModal";
+import { DesktopNavigation } from "./desktop";
+import { MobileMenu } from "./mobile";
 
 const NavBar = () => {
   const { modalState, openModalType, closeModal } = useModalState();
   const { profileDetails, isLoggedIn } = usePoppis();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleLoginClick = () => {
     openModalType("LOGIN");
@@ -27,66 +24,48 @@ const NavBar = () => {
     openModalType("REGISTER");
   };
 
+  const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
+  const closeMobileMenu = () => setMobileMenuOpen(false);
+
   return (
-    <div className="flex w-full justify-between items-center">
-      <div className="p-5">POPPIS</div>
-      <NavigationMenu className="w-full">
-        <NavigationMenuList className="">
-          <NavigationMenuItem>
-            <Link href="/" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Etusivu
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
+    <div className="w-full">
+      <div className="flex w-full justify-between items-center px-4 py-3">
+        <Link href="/" className="font-bold text-xl p-2">POPPIS</Link>
 
-          <NavigationMenuItem>
-            <Link href="/scoreboard" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Menestyjät
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
+        <DesktopNavigation
+          isLoggedIn={isLoggedIn}
+          profileDetails={profileDetails}
+          onLoginClick={handleLoginClick}
+        />
 
-          <NavigationMenuItem>
-            <Link href="/achievements" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Saavutukset
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
+        {/* Mobile menu button */}
+        <Button
+          variant="ghost"
+          className="md:hidden"
+          onClick={toggleMobileMenu}
+          size="icon"
+          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+        >
+          {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </Button>
+      </div>
 
-          {isLoggedIn && <NavigationMenuItem>
-            <Link href="/achievements/hunter" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              🏆 Metsästys 🏆
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>}
-
-          {isLoggedIn && <NavigationMenuItem>
-            <Link href="/profile" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Sinä
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>}
-        </NavigationMenuList>
-      </NavigationMenu>
-      {profileDetails ? (
-        <LogoutButton />
-      ) : (
-        <LoginButton onClick={handleLoginClick} />
-      )}
+      <MobileMenu
+        isOpen={mobileMenuOpen}
+        isLoggedIn={isLoggedIn}
+        profileDetails={profileDetails}
+        onClose={closeMobileMenu}
+        onLoginClick={handleLoginClick}
+      />
 
       <LoginModal
         isOpen={modalState === "LOGIN"}
         onRegister={handleRegisterClick}
-        onClose={() => closeModal()}
+        onClose={closeModal}
       />
       <RegisterModal
         isOpen={modalState === "REGISTER"}
-        onClose={() => closeModal()}
+        onClose={closeModal}
       />
     </div>
   );
