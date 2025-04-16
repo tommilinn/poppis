@@ -30,3 +30,31 @@ This is a personal hobby project using nextjs. The idea is that a person can log
 - Social sharing
 - Friend connections
 - Badges/special rewards
+
+## Code Conventions
+- File/folder naming:
+  - Route segments (folders in app/): kebab-case (e.g., user-profile, achievement-details)
+  - Page files: lowercase (e.g., page.tsx, layout.tsx, loading.tsx)
+  - Components: PascalCase (e.g., UserAvatar.tsx, AchievementCard.tsx)
+  - Utilities/helpers: camelCase (e.g., formatDate.ts, calculatePoints.ts)
+  - Types/Interfaces: PascalCase (e.g., UserProfile, AchievementType)
+- Component structure:
+  - Use React Server Components by default ("use client" only when needed)
+  - Keep client components focused on interactivity
+  - Extract reusable components to /components directory
+- State management approach:
+  - React Context for global state where appropriate
+  - React Query for server state management
+  - Form state with react-hook-form
+- Error handling patterns:
+  - Try/catch for async operations
+  - Error boundaries for client components
+  - Consistent error UI components
+
+## Learning Goals
+- This is primarily a learning project
+- Proactively identify and explain non-standard patterns or anti-patterns in my code
+- Suggest improvements with explanations of why they're better
+- Point out when I'm deviating from Next.js, React, or TypeScript best practices
+- Explain conventions and reasoning when generating new code
+- Provide educational context when appropriate without being overly verbose
