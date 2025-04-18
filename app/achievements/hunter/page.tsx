@@ -30,7 +30,7 @@ const Hunting = () => {
                 <AccordionContent>
                   {createCard({
                     name: category.name,
-                    achievements: category.achievementTypes,
+                    achievements: category.achievementTypes ?? [],
                   })}
                 </AccordionContent>
               </AccordionItem>
